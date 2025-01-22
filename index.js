@@ -20,27 +20,21 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 app.use(express.json());
-app.use(cors());
+
 app.use(
   cors({
     origin: "https://e-mail-builder.netlify.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Content-Type, Authorization",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type, Authorization"],
+    credentials: true,
   })
 );
 
-app.options("*", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://e-mail-builder.netlify.app/");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.sendStatus(200);
-});
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/getEmailLayout", (req, res) => {
-    const filePath = path.join("./public/layout.html");
+    const filePath = path.join(__dirname, "public","layout.html");
 
     fs.readFile(filePath, "utf-8", (err, data) => {
         if (err) {
