@@ -110,6 +110,8 @@ newrouter.get("/getEmailLayout", (req, res) => {
 newrouter.post("/uploadEmailConfig", async (req, res) => {
   try {
     const { title, content, footer, imageURL } = req.body;
+    console.log("Req Body: ", req.body);
+    
     const newTemplate = new Template({ title, content, footer, imageURL });
     await newTemplate.save();
     res.status(201).json(newTemplate);
