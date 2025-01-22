@@ -23,7 +23,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "https://e-mail-builder.netlify.app/",
+    origin: "https://e-mail-builder.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type, Authorization"],
     credentials: true,
